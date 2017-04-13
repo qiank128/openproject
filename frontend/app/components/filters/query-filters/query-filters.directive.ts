@@ -73,7 +73,11 @@ function queryFiltersDirective($timeout:ng.ITimeoutService,
           scope.deactivateFilter = function (removedFilter:QueryFilterInstanceResource) {
             let index = scope.filters.current.indexOf(removedFilter);
 
-            wpTableFilters.remove(removedFilter);
+            if (removedFilter.isCompletelyDefined()) {
+              wpTableFilters.remove(removedFilter);
+            } else {
+              scope.filters.remove(removedFilter);
+            }
 
             updateFilterFocus(index);
 

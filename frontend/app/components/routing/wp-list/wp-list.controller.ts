@@ -98,8 +98,8 @@ function WorkPackagesListController($scope:any,
       }
     });
 
-    wpTableFilters.observeOnScope($scope).subscribe(filters => {
-      updateAndExecuteIfAltered(filters.current, 'filters', true);
+    wpTableFilters.observeCompleteFiltersOnScope($scope).subscribe(current => {
+      updateAndExecuteIfAltered(current, 'filters', true);
     });
 
     wpTableGroupBy.observeOnScope($scope).subscribe(groupBy => {

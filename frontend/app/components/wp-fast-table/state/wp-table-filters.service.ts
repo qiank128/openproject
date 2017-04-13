@@ -81,6 +81,13 @@ export class WorkPackageTableFiltersService extends WorkPackageTableBaseService 
     this.state.putValue(this.currentState);
   }
 
+  public observeCompleteFiltersOnScope($scope:ng.IScope) {
+    return this
+             .observeOnScope($scope)
+             .map(filters => _.filter(filters.current,
+                                      (filter:QueryFilterInstanceResource) => filter.isCompletelyDefined()));
+  }
+
   private loadCurrentFiltersSchemas(filters:QueryFilterInstanceResource[]):ng.IPromise<{}> {
     return this.$q.all(_.map(filters,
                        (filter:QueryFilterInstanceResource) => this.loadFilterSchema(filter)));
